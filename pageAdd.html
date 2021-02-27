@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <title>ADD PRD</title>
+</head>
+<body>
+    <style>
+        *{
+    padding: 0;
+    margin: 0;
+}
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0bebc;
+}
+.container .login-form {
+    width: 50%;
+    height: 600px;
+    border: 2px solid #a07a61;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 0 5px rgb(0 0 0 / 30%);
+}
+.container .login-form > div,
+.container .login-form button  {
+    width: 80%;
+    height: 40px;
+    margin: 20px auto;
+}
+.container .login-form button {
+    background-color: #a07a61;
+    outline: none;
+    border: none;
+    color:white;
+    border-radius: 5px;
+    transition: 0.7s;
+}
+.container .login-form button:hover {
+    background-color: #543b2b;
+    cursor: pointer;
+}
+.container .login-form > div input:hover {
+    cursor: pointer;
+}
+.container .login-form > div input {
+    width: 100%;
+    height: 30px;
+}
+img {
+    width: 50%;
+    
+}
+    </style>
+    <div class="container">
+        <div class="login-form">
+            <img src="./assets/images/logo/logo-mona-2.png" alt="">
+            <div >
+                <p>Image product</p>
+                <input type="text"  id="image">
+            </div>
+            <div >
+                <p>Name product</p>
+                <input type="text"  id="name">
+            </div>
+            <div >
+                <p>Cost</p>
+                <input type="number"  id="price">
+            </div>
+            <button onclick="MakeProduct()">Tạo sản phẩm </button>
+        </div>
+    </div>
+    <script src="./assets/js/json.js"></script> 
+    <script>
+
+    function listPrd(image, name, price,){
+    let product = new Object();
+    product.image = image,
+    product.name  = name,
+    product.price = price
+    
+    return product ;
+}
+    var arrayPrd = JSON.parse(localStorage.getItem('array'));
+
+    if(arrayPrd === null){
+        arrayPrd = new Array();
+    }
+
+    function MakeProduct(){
+        let noteImg = document.getElementById('image');
+        let image    = noteImg.value
+        noteImg.value = ""
+
+        let noteName = document.getElementById('name');
+        let name     = noteName.value
+        noteName.value = ""
+
+        let notePrice = document.getElementById('price');
+        let price     = notePrice.value
+        notePrice.value = ""
+        
+        var prd = listPrd(image, name, price)
+        arrayPrd.push(prd);
+        
+        var json = JSON.stringify(arrayPrd);
+        localStorage.setItem('array',json);
+    }
+    console.log(arrayPrd);
+    </script>
+</body>
+</html>
